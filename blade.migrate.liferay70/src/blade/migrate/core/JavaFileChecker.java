@@ -12,6 +12,7 @@ import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.Block;
+import org.eclipse.jdt.core.dom.CatchClause;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.Expression;
 import org.eclipse.jdt.core.dom.ITypeBinding;
@@ -38,6 +39,41 @@ public class JavaFileChecker {
 			throw new IllegalArgumentException(e);
 		}
 	}
+	
+	public List<SearchResult> findExceptionCatch(final String[] exceptions) {
+
+		final List<SearchResult> searchResults = new ArrayList<>();
+		
+		ast.accept(new ASTVisitor() {
+
+			@Override
+			public boolean visit(CatchClause node){
+				String exceptionTypeName = node.getException().getType().toString();
+				boolean retVal = false;
+				
+				for (String exceptionType : exceptions) {
+					if ( exceptionTypeName.equals(exceptionType)){
+						final int startLine = ast.getLineNumber(node.getException().getStartPosition());
+						final int startOffset = node.getException().getStartPosition();
+						
+						int endLine = ast.getLineNumber(node.getStartPosition());
+							int endOffset = node.getStartPosition();
+							searchResults
+									.add(new SearchResult(file, startOffset,
+										endOffset, startLine, endLine));
+							
+							retVal = true;
+					}					
+				}
+
+				return retVal;
+			}
+		});
+		
+		return searchResults;
+
+	}
+	
 
 	public SearchResult findImport(final String importName) {
 		final List<SearchResult> searchResults = new ArrayList<>();
