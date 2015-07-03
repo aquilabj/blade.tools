@@ -26,7 +26,7 @@ public class AllProblemsTest {
 				.findProblems(new File(
 						"../blade.migrate.liferay70/projects/"));
 
-		assertEquals(52, problems.size());
+		assertEquals(53, problems.size());
 	}
 
 	private final BundleContext context = FrameworkUtil.getBundle(

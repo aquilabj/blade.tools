@@ -73,8 +73,8 @@ public class JavaFileChecker {
 						final int startLine = ast.getLineNumber(node.getException().getStartPosition());
 						final int startOffset = node.getException().getStartPosition();
 
-						int endLine = ast.getLineNumber(node.getStartPosition());
-							int endOffset = node.getStartPosition();
+						int endLine = ast.getLineNumber(node.getException().getStartPosition() + node.getException().getLength());
+							int endOffset = node.getException().getStartPosition() + node.getException().getLength();
 							searchResults
 									.add(new SearchResult(file, startOffset,
 										endOffset, startLine, endLine));

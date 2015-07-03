@@ -23,8 +23,8 @@ public class JavaFileCheckerTest {
 		assertNotNull(searchResult);
 		assertEquals( 14, searchResult.startLine );
 		assertEquals( 15, searchResult.endLine );
-		assertEquals( 218, searchResult.startOffset );
-		assertEquals( 240, searchResult.endOffset );
+		assertEquals( 231, searchResult.startOffset );
+		assertEquals( 254, searchResult.endOffset );
 	}
 
 	@Test
@@ -42,7 +42,7 @@ public class JavaFileCheckerTest {
 		assertNotNull(searchResult);
 		assertEquals( 10, searchResult.startLine );
 		assertEquals( 11, searchResult.endLine );
-		assertEquals( 170, searchResult.startOffset );
-		assertEquals( 189, searchResult.endOffset );
+		assertEquals( 179, searchResult.startOffset );
+		assertEquals( 199, searchResult.endOffset );
 	}
 }
